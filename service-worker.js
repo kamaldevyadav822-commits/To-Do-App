@@ -1,7 +1,3 @@
-// =========================
-// FILE: service-worker.js
-// =========================
-
 const CACHE_NAME = "todo-pwa-v1";
 
 const urlsToCache = [
