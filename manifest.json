@@ -1,7 +1,3 @@
-// =========================
-// FILE: manifest.json
-// =========================
-
 {
   "name": "Professional Todo App",
   "short_name": "Todo",
