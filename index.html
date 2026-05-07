@@ -1,15 +1,11 @@
-<!-- =========================
-FILE: index.html
-========================= -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
   <meta charset="UTF-8"/>
 
-  <!-- MOBILE FIRST -->
-  <meta 
+  <!-- MOBILE RESPONSIVE -->
+  <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   />
@@ -17,23 +13,26 @@ FILE: index.html
   <!-- PWA -->
   <meta name="theme-color" content="#111827"/>
 
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  />
 
-  <meta 
+  <meta
     name="apple-mobile-web-app-status-bar-style"
     content="black-translucent"
   />
 
-  <meta 
+  <meta
     name="apple-mobile-web-app-title"
     content="Todo App"
   />
 
-  <link rel="manifest" href="manifest.json"/>
+  <link rel="manifest" href="/manifest.json"/>
 
-  <link 
+  <link
     rel="apple-touch-icon"
-    href="icons/icon-192.png"
+    href="/icons/icon-192.png"
   />
 
   <title>Professional Todo App</title>
@@ -53,286 +52,551 @@ FILE: index.html
     }
 
     body{
+
       font-family:Arial,sans-serif;
+
       min-height:100vh;
+
       overflow-x:hidden;
+
       background:
-      linear-gradient(135deg,#0f172a,#111827,#1e293b);
+      linear-gradient(
+        135deg,
+        #0f172a,
+        #111827,
+        #1e293b
+      );
+
       display:flex;
       justify-content:center;
       align-items:center;
+
       padding:15px;
+
       color:white;
+
     }
 
-    /* BACKGROUND ANIMATION */
+    /* BACKGROUND */
+
     .bg-blur{
+
       position:fixed;
+
       width:280px;
       height:280px;
+
       background:#2563eb;
+
       border-radius:50%;
+
       filter:blur(120px);
+
       opacity:0.35;
+
       top:-100px;
       left:-90px;
+
       animation:float 8s ease-in-out infinite;
+
       z-index:0;
+
     }
 
     @keyframes float{
+
       0%,100%{
         transform:translateY(0px);
       }
+
       50%{
         transform:translateY(25px);
       }
+
     }
 
     /* APP */
+
     .todo-app{
+
       width:100%;
       max-width:500px;
+
       background:rgba(255,255,255,0.08);
+
       border:1px solid rgba(255,255,255,0.12);
+
       backdrop-filter:blur(12px);
+
       border-radius:25px;
+
       padding:20px;
+
       position:relative;
+
       z-index:2;
-      box-shadow:0 12px 35px rgba(0,0,0,0.35);
+
+      box-shadow:
+      0 12px 35px rgba(0,0,0,0.35);
+
     }
+
+    /* INSTALL BUTTON */
+
+    .install-btn{
+
+      position:absolute;
+
+      top:18px;
+      right:18px;
+
+      border:none;
+      outline:none;
+
+      padding:10px 14px;
+
+      border-radius:14px;
+
+      background:
+      linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+      );
+
+      color:white;
+
+      font-size:13px;
+      font-weight:bold;
+
+      cursor:pointer;
+
+      display:none;
+
+      transition:0.3s;
+
+      box-shadow:
+      0 6px 18px rgba(37,99,235,0.35);
+
+      z-index:5;
+
+    }
+
+    .install-btn:hover{
+
+      transform:translateY(-2px);
+
+    }
+
+    .install-btn:active{
+
+      transform:scale(0.95);
+
+    }
+
+    /* TITLE */
 
     .title{
+
       text-align:center;
+
       font-size:28px;
+
       font-weight:bold;
+
       margin-bottom:20px;
+
       letter-spacing:1px;
+
+      margin-top:20px;
+
     }
 
-    /* INPUT */
+    /* INPUT AREA */
+
     .input-area{
+
       display:flex;
+
       flex-direction:column;
+
       gap:12px;
+
       margin-bottom:20px;
+
     }
 
     .task-input{
+
       width:100%;
+
       padding:16px;
+
       border:none;
       outline:none;
+
       border-radius:16px;
-      background:rgba(255,255,255,0.10);
+
+      background:
+      rgba(255,255,255,0.10);
+
       color:white;
+
       font-size:16px;
+
       transition:0.3s;
+
     }
 
     .task-input::placeholder{
+
       color:#cbd5e1;
+
     }
 
     .task-input:focus{
-      background:rgba(255,255,255,0.15);
+
+      background:
+      rgba(255,255,255,0.15);
+
       transform:scale(1.01);
+
     }
 
-    /* BUTTON */
+    /* ADD BUTTON */
+
     .add-btn{
+
       width:100%;
+
       border:none;
+
       padding:16px;
+
       border-radius:16px;
+
       background:
-      linear-gradient(135deg,#3b82f6,#2563eb);
+      linear-gradient(
+        135deg,
+        #3b82f6,
+        #2563eb
+      );
+
       color:white;
+
       font-size:16px;
       font-weight:bold;
+
       cursor:pointer;
+
       transition:0.3s;
+
       position:relative;
+
       overflow:hidden;
+
     }
 
     .add-btn:hover{
+
       transform:translateY(-2px);
-      box-shadow:0 10px 20px rgba(37,99,235,0.4);
+
+      box-shadow:
+      0 10px 20px rgba(37,99,235,0.4);
+
     }
 
     .add-btn:active{
+
       transform:scale(0.95);
+
     }
 
     /* LOADER */
+
     .loader{
+
       width:22px;
       height:22px;
+
       border:3px solid rgba(255,255,255,0.3);
+
       border-top:3px solid white;
+
       border-radius:50%;
+
       animation:spin 0.8s linear infinite;
+
       display:none;
+
       margin:auto;
+
     }
 
     @keyframes spin{
+
       from{
         transform:rotate(0deg);
       }
+
       to{
         transform:rotate(360deg);
       }
+
     }
 
     /* STATS */
+
     .stats{
+
       display:flex;
+
       justify-content:space-between;
+
       flex-wrap:wrap;
+
       gap:10px;
+
       margin-bottom:18px;
+
       font-size:14px;
+
       color:#dbeafe;
+
     }
 
     /* TASK LIST */
+
     .task-list{
+
       list-style:none;
+
       display:flex;
+
       flex-direction:column;
+
       gap:14px;
+
       max-height:55vh;
+
       overflow-y:auto;
+
       padding-right:3px;
+
     }
 
     .task-list::-webkit-scrollbar{
+
       width:4px;
+
     }
 
     .task-list::-webkit-scrollbar-thumb{
+
       background:#3b82f6;
+
       border-radius:20px;
+
     }
 
-    /* TASK */
+    /* TASK ITEM */
+
     .task-item{
-      background:rgba(255,255,255,0.08);
+
+      background:
+      rgba(255,255,255,0.08);
+
       border-radius:18px;
+
       padding:16px;
+
       display:flex;
+
       flex-direction:column;
+
       gap:14px;
+
       animation:slideIn 0.35s ease;
+
       transition:0.3s;
+
     }
 
     .task-item:hover{
-      background:rgba(255,255,255,0.12);
+
+      background:
+      rgba(255,255,255,0.12);
+
     }
 
     @keyframes slideIn{
+
       from{
+
         opacity:0;
+
         transform:translateY(12px);
+
       }
+
       to{
+
         opacity:1;
+
         transform:translateY(0);
+
       }
+
     }
 
     .task-text{
+
       font-size:16px;
+
       line-height:1.5;
+
       word-wrap:break-word;
+
     }
 
     .completed{
+
       text-decoration:line-through;
+
       opacity:0.5;
+
     }
 
     /* ACTIONS */
+
     .task-actions{
+
       display:flex;
+
       gap:10px;
+
       width:100%;
+
     }
 
     .done-btn,
     .delete-btn{
+
       flex:1;
+
       border:none;
+
       padding:13px;
+
       border-radius:14px;
+
       color:white;
+
       font-weight:bold;
+
       cursor:pointer;
+
       transition:0.3s;
+
       font-size:14px;
+
     }
 
     .done-btn{
+
       background:
-      linear-gradient(135deg,#10b981,#059669);
+      linear-gradient(
+        135deg,
+        #10b981,
+        #059669
+      );
+
     }
 
     .delete-btn{
+
       background:
-      linear-gradient(135deg,#ef4444,#dc2626);
+      linear-gradient(
+        135deg,
+        #ef4444,
+        #dc2626
+      );
+
     }
 
     .done-btn:hover,
     .delete-btn:hover{
+
       transform:scale(1.03);
+
     }
 
     .done-btn:active,
     .delete-btn:active{
+
       transform:scale(0.94);
+
     }
 
     /* EMPTY */
+
     .empty-msg{
+
       text-align:center;
+
       color:#cbd5e1;
+
       padding:20px 10px;
+
       font-size:15px;
+
     }
 
     /* DESKTOP */
+
     @media(min-width:768px){
 
       .todo-app{
+
         padding:28px;
+
       }
 
       .input-area{
+
         flex-direction:row;
+
       }
 
       .add-btn{
+
         width:160px;
+
       }
 
       .task-item{
+
         flex-direction:row;
+
         justify-content:space-between;
+
         align-items:center;
+
       }
 
       .task-actions{
+
         width:auto;
+
       }
 
       .done-btn,
       .delete-btn{
+
         width:110px;
+
       }
+
     }
 
   </style>
@@ -345,9 +609,23 @@ FILE: index.html
 
   <div class="todo-app">
 
-    <h1 class="title">To-Do List</h1>
+    <!-- INSTALL BUTTON -->
+
+    <button
+      id="installBtn"
+      class="install-btn"
+    >
+      ⬇ Install
+    </button>
+
+    <!-- TITLE -->
+
+    <h1 class="title">
+      To-Do List
+    </h1>
 
     <!-- INPUT -->
+
     <div class="input-area">
 
       <input
@@ -357,17 +635,26 @@ FILE: index.html
         placeholder="Enter your task..."
       />
 
-      <button class="add-btn" id="addBtn">
+      <button
+        class="add-btn"
+        id="addBtn"
+      >
 
-        <span id="btnText">Add Task</span>
+        <span id="btnText">
+          Add Task
+        </span>
 
-        <div class="loader" id="loader"></div>
+        <div
+          class="loader"
+          id="loader"
+        ></div>
 
       </button>
 
     </div>
 
     <!-- STATS -->
+
     <div class="stats">
 
       <span id="totalTasks">
@@ -381,16 +668,26 @@ FILE: index.html
     </div>
 
     <!-- TASKS -->
-    <ul class="task-list" id="taskList"></ul>
+
+    <ul
+      class="task-list"
+      id="taskList"
+    ></ul>
 
     <!-- EMPTY -->
-    <div class="empty-msg" id="emptyMsg">
+
+    <div
+      class="empty-msg"
+      id="emptyMsg"
+    >
       No tasks available.
     </div>
 
   </div>
 
   <script>
+
+    // ELEMENTS
 
     const taskInput =
     document.getElementById("taskInput");
@@ -416,12 +713,18 @@ FILE: index.html
     const completedTasks =
     document.getElementById("completedTasks");
 
-    // LOCAL STORAGE
-    let tasks =
-    JSON.parse(localStorage.getItem("todo_tasks"))
-    || [];
+    const installBtn =
+    document.getElementById("installBtn");
 
-    // SAVE
+    // LOCAL STORAGE
+
+    let tasks =
+    JSON.parse(
+      localStorage.getItem("todo_tasks")
+    ) || [];
+
+    // SAVE TASKS
+
     function saveTasks(){
 
       localStorage.setItem(
@@ -432,31 +735,37 @@ FILE: index.html
     }
 
     // UPDATE STATS
+
     function updateStats(){
 
       totalTasks.innerText =
       `Total: ${tasks.length}`;
 
       const completed =
-      tasks.filter(task => task.completed).length;
+      tasks.filter(
+        task => task.completed
+      ).length;
 
       completedTasks.innerText =
       `Completed: ${completed}`;
 
     }
 
-    // RENDER
+    // RENDER TASKS
+
     function renderTasks(){
 
       taskList.innerHTML = "";
 
       if(tasks.length === 0){
 
-        emptyMsg.style.display = "block";
+        emptyMsg.style.display =
+        "block";
 
       }else{
 
-        emptyMsg.style.display = "none";
+        emptyMsg.style.display =
+        "none";
 
       }
 
@@ -476,11 +785,15 @@ FILE: index.html
           <div class="task-actions">
 
             <button class="done-btn">
+
               ${task.completed ? 'Undo' : 'Done'}
+
             </button>
 
             <button class="delete-btn">
+
               Delete
+
             </button>
 
           </div>
@@ -488,6 +801,7 @@ FILE: index.html
         `;
 
         // DONE
+
         li.querySelector(".done-btn")
         .addEventListener("click",()=>{
 
@@ -495,15 +809,18 @@ FILE: index.html
           !tasks[index].completed;
 
           saveTasks();
+
           renderTasks();
 
         });
 
         // DELETE
+
         li.querySelector(".delete-btn")
         .addEventListener("click",()=>{
 
           li.style.opacity = "0";
+
           li.style.transform =
           "translateX(80px)";
 
@@ -512,6 +829,7 @@ FILE: index.html
             tasks.splice(index,1);
 
             saveTasks();
+
             renderTasks();
 
           },250);
@@ -527,6 +845,7 @@ FILE: index.html
     }
 
     // ADD TASK
+
     function addTask(){
 
       const text =
@@ -539,14 +858,17 @@ FILE: index.html
 
         setTimeout(()=>{
 
-          taskInput.style.border = "none";
+          taskInput.style.border =
+          "none";
 
         },1000);
 
         return;
+
       }
 
-      // LOADER
+      // SHOW LOADER
+
       loader.style.display = "block";
 
       btnText.style.display = "none";
@@ -556,30 +878,36 @@ FILE: index.html
         tasks.unshift({
 
           text:text,
+
           completed:false
 
         });
 
         saveTasks();
+
         renderTasks();
 
         taskInput.value = "";
 
-        loader.style.display = "none";
+        loader.style.display =
+        "none";
 
-        btnText.style.display = "block";
+        btnText.style.display =
+        "block";
 
       },500);
 
     }
 
-    // CLICK
+    // BUTTON CLICK
+
     addBtn.addEventListener(
       "click",
       addTask
     );
 
-    // ENTER
+    // ENTER KEY
+
     taskInput.addEventListener(
       "keypress",
       (e)=>{
@@ -593,35 +921,99 @@ FILE: index.html
       }
     );
 
-    // INITIAL
+    // INITIAL RENDER
+
     renderTasks();
 
     // SERVICE WORKER
+
     if("serviceWorker" in navigator){
 
-      window.addEventListener("load",()=>{
+      window.addEventListener(
+        "load",
+        ()=>{
 
-        navigator.serviceWorker
-        .register("./service-worker.js")
-        .then(()=>{
+          navigator.serviceWorker
+          .register("/service-worker.js")
+          .then(()=>{
 
-          console.log(
-            "Service Worker Registered"
-          );
+            console.log(
+              "Service Worker Registered"
+            );
 
-        })
-        .catch((error)=>{
+          })
+          .catch((error)=>{
 
-          console.log(
-            "Service Worker Failed:",
-            error
-          );
+            console.log(
+              "SW Failed:",
+              error
+            );
 
-        });
+          });
 
-      });
+        }
+      );
 
     }
+
+    // INSTALL BUTTON
+
+    let deferredPrompt;
+
+    window.addEventListener(
+      "beforeinstallprompt",
+      (e)=>{
+
+        e.preventDefault();
+
+        deferredPrompt = e;
+
+        installBtn.style.display =
+        "block";
+
+      }
+    );
+
+    // INSTALL CLICK
+
+    installBtn.addEventListener(
+      "click",
+      async ()=>{
+
+        if(!deferredPrompt) return;
+
+        deferredPrompt.prompt();
+
+        const result =
+        await deferredPrompt.userChoice;
+
+        if(result.outcome === "accepted"){
+
+          console.log("Installed");
+
+        }
+
+        deferredPrompt = null;
+
+        installBtn.style.display =
+        "none";
+
+      }
+    );
+
+    // AFTER INSTALL
+
+    window.addEventListener(
+      "appinstalled",
+      ()=>{
+
+        installBtn.style.display =
+        "none";
+
+        console.log("PWA Installed");
+
+      }
+    );
 
   </script>
 
